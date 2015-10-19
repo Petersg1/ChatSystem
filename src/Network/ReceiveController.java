@@ -25,11 +25,18 @@ public class ReceiveController {
 
         if (receivedObject instanceof Hello) {
             helloReceived();
+        } else {
+            somethingReceived();
         }
+
     }
 
     private void helloReceived() {
-        System.out.print("J'ai reçu un hello !!!! :D");
+        System.out.println("J'ai reçu un hello !!!! :D");
+    }
+
+    private void somethingReceived() {
+        System.out.println("Something was received, but not a hello");
     }
 
 }
