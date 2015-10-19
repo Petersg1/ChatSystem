@@ -1,0 +1,29 @@
+package Packet;
+
+import java.net.InetAddress;
+
+/**
+ * Created by pierre on 19/10/15.
+ */
+public class HelloBack {
+
+        private String nickname;
+        private InetAddress ip;
+
+        public HelloBack(String nickname, InetAddress ip){
+            this.ip = ip;
+            this.nickname = nickname;
+        }
+        public String getNickname() {
+            return nickname;
+        }
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
+        public InetAddress getIp() {
+            return this.ip;
+        }
+        public void setIp(InetAddress ip) {
+            this.ip = ip;
+        }
+}
