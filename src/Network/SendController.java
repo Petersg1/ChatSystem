@@ -7,7 +7,6 @@ import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.net.SocketException;
 
 /**
  * Created by pierre on 19/10/15.
@@ -19,10 +18,12 @@ public class SendController {
 
         byte[] byteHello = SerDeser.serialize(helloPacket);
         DatagramSocket udpSocket = new DatagramSocket();
-        DatagramPacket udpPacket = new DatagramPacket(byteHello,byteHello.length,InetAddress.getByName("255.255.255.255"), 42025 );
+        DatagramPacket udpPacket = new DatagramPacket(byteHello,byteHello.length,InetAddress.getLoopbackAddress(), 42025 );
 
         udpSocket.setBroadcast(true);
         udpSocket.send(udpPacket);
         udpSocket.close();
+
+        System.out.println("Hi, just sent the packet to " + InetAddress.getLoopbackAddress());
     }
 }
