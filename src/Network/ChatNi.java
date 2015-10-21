@@ -7,17 +7,31 @@ import java.net.InetAddress;
 
 /**
  * Created by pierre on 20/10/15.
+ *
+ * Class facade
  */
 public class ChatNi {
 
+    //Envoie un hello
     public void sendHello() throws IOException {
         SendController sender = new SendController();
         sender.sHello(new Hello("Helene", InetAddress.getLocalHost()));
     }
 
+    //Pour écouter les packets
     public void listenPacket() throws IOException, ClassNotFoundException {
-        ReceiveController receiver = new ReceiveController();
-        receiver.ListenUdpPacket();
+        ReceiveController receiverThread = new ReceiveController(this);
+        receiverThread.start();
     }
 
+    /* Method Process */
+
+    public void processHello(Hello helloReceived) {
+        System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
+    }
+
+
+    public void processWeirdPacket() {
+        System.out.println("Something was received, but we don't know what :/");
+    }
 }

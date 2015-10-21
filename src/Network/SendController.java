@@ -13,7 +13,7 @@ import java.net.InetAddress;
  */
 public class SendController {
 
-
+    //Envoie un hello à tous <3 enfin au localhost pour l'instant
     public void sHello(Hello helloPacket) throws IOException {
 
         byte[] byteHello = SerDeser.serialize(helloPacket);
