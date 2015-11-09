@@ -1,5 +1,7 @@
 package Network;
 
+import Data.User;
+import Data.UsersList;
 import Packet.Hello;
 
 import java.io.IOException;
@@ -11,6 +13,17 @@ import java.net.InetAddress;
  * Class facade
  */
 public class ChatNi {
+
+
+    /* Attributs */
+    private UsersList usersList;
+
+    /* Constructeurs */
+    public ChatNi(UsersList usersList) {
+        this.usersList = usersList;
+    }
+
+
 
     //Envoie un hello
     public void sendHello() throws IOException {
@@ -28,6 +41,7 @@ public class ChatNi {
 
     public void processHello(Hello helloReceived) {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
+        this.usersList.add(helloReceived.getNickname(), helloReceived.getIp());
     }
 
 

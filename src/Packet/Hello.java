@@ -9,7 +9,7 @@ public class Hello extends Packet{
     private String nickname;
     private InetAddress ip;
 
-    public Hello(String nickname, InetAddress ip){
+    public Hello(String nickname, InetAddress ip){ //Son nom et son adresse IP
         this.ip = ip;
         this.nickname = nickname;
     }

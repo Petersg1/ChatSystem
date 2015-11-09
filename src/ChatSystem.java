@@ -2,6 +2,7 @@
  * Created by pierre on 19/10/15.
  *
  */
+import Data.UsersList;
 import Network.*;
 
 import java.io.IOException;
@@ -13,8 +14,14 @@ public class ChatSystem {
 
     //Fonction principale
     public static void main (String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+
+        /* Attribus acteurs */
+        UsersList usersList = new UsersList();
+        ChatNi network = new ChatNi(usersList);
+
+
+
         Scanner sc = new Scanner(System.in);
-        ChatNi network = new ChatNi();
         Integer choix = 1;
         System.out.println("Make your choice.\n1- Listening a packet\n2- Sending a packet\n0- Exit");
 
