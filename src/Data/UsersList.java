@@ -27,5 +27,7 @@ public class UsersList {
         this.list.add(new User(nickname,ip));
     }
 
-
+    public void remove (User user) {
+        this.list.remove(user);
+    }
 }

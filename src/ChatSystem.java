@@ -2,7 +2,7 @@
  * Created by pierre on 19/10/15.
  *
  */
-import Data.UsersList;
+import Data.*;
 import Network.*;
 
 import java.io.IOException;
@@ -16,8 +16,8 @@ public class ChatSystem {
     public static void main (String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
         /* Attribus acteurs */
-        UsersList usersList = new UsersList();
-        ChatNi network = new ChatNi(usersList);
+        Data data = new Data();
+        ChatNi network = new ChatNi(data);
 
 
 
