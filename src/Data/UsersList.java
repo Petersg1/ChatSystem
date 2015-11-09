@@ -30,4 +30,5 @@ public class UsersList {
     public void remove (User user) {
         this.list.remove(user);
     }
+
 }

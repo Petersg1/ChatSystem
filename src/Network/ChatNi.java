@@ -23,7 +23,6 @@ public class ChatNi {
     }
 
 
-
     //Envoie un hello
     public void sendHello() throws IOException {
         SendController sender = new SendController();
