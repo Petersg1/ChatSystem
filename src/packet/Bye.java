@@ -1,17 +1,23 @@
 package packet;
 
-/**
- * Created by pierre on 10/11/15.
- */
-
 import java.net.InetAddress;
 
-public class Bye extends Packet{
+
+public class Bye extends Packet {
     private String nickname;
     private InetAddress ip;
 
-    public Bye(String nickname, InetAddress ip){
+    /* Constructor */
+    public Bye(String nickname){
         this.nickname = nickname;
+    }
+
+    /* Methods */
+    public InetAddress getIp() {
+        return ip;
+    }
+
+    public void setIp(InetAddress ip) {
         this.ip = ip;
     }
 

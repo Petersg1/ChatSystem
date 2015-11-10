@@ -1,11 +1,13 @@
 package network;
 
+import packet.Bye;
 import packet.Hello;
 import packet.SerDeser;
 
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 
 
 /**
@@ -51,7 +53,11 @@ public class ReceiveController extends Thread {
             //Fais ce qu'il faut en conséquence de ce qui est reçu
             if (receivedObject instanceof Hello) {
                 this.chatNi.processHello((Hello) receivedObject);
-            } else {
+            }
+            else if (receivedObject instanceof Bye){
+                    this.chatNi.processBye((Bye) receivedObject);
+            }
+            else{
                 this.chatNi.processWeirdPacket();
             }
         }

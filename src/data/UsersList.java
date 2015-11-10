@@ -31,4 +31,18 @@ public class UsersList {
         this.list.remove(user);
     }
 
+    public void remove (InetAddress ip) {
+
+        for (int i=0; i<=this.nbUser; i++){
+           if (list.get(i).getIp()==ip){
+               this.list.remove(i);
+            }
+
+        }
+    }
+    public int getNbUser() {
+        return nbUser;
+    }
+
+
 }

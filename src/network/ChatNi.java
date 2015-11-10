@@ -1,7 +1,7 @@
 package network;
 
 import data.*;
-import packet.Hello;
+import packet.*;
 
 import java.io.IOException;
 
@@ -39,6 +39,11 @@ public class ChatNi {
     public void processHello(Hello helloReceived) {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
         this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
+    }
+
+    public void processBye(Bye byeReceived){
+        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + "d'adresse " + byeReceived.getIp() + ".");
+        this.data.removeUser(byeReceived.getIp());
     }
 
 
