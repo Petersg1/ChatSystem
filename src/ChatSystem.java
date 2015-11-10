@@ -2,8 +2,8 @@
  * Created by pierre on 19/10/15.
  *
  */
-import Data.*;
-import Network.*;
+import data.*;
+import network.*;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,12 +13,11 @@ public class ChatSystem {
 
 
     //Fonction principale
-    public static void main (String[] args) throws IOException, ClassNotFoundException, InterruptedException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
         /* Attribus acteurs */
         Data data = new Data();
         ChatNi network = new ChatNi(data);
-
 
 
         Scanner sc = new Scanner(System.in);
@@ -41,3 +40,4 @@ public class ChatSystem {
         }
     }
 }
+

@@ -1,12 +1,11 @@
-package Network;
+package network;
 
-import Packet.Hello;
-import Packet.SerDeser;
+import packet.Hello;
+import packet.SerDeser;
 
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
 
 
 /**

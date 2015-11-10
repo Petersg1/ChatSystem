@@ -1,10 +1,9 @@
-package Network;
+package network;
 
-import Data.*;
-import Packet.Hello;
+import data.*;
+import packet.Hello;
 
 import java.io.IOException;
-import java.net.InetAddress;
 
 /**
  * Created by pierre on 20/10/15.
@@ -26,7 +25,7 @@ public class ChatNi {
     //Envoie un hello
     public void sendHello() throws IOException {
         SendController sender = new SendController();
-        sender.sHello(new Hello("Helene", InetAddress.getLocalHost()));
+        sender.sHello(new Hello("Pierre", data.getLocalUser().getIp()));
     }
 
     //Pour écouter les packets
@@ -41,6 +40,8 @@ public class ChatNi {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
         this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
     }
+
+
 
 
     public void processWeirdPacket() {

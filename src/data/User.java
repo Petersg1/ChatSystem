@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import java.net.InetAddress;
 
@@ -8,12 +8,17 @@ import java.net.InetAddress;
 public class User {
 
     /* Attribus */
-    private String nickname;
-    private InetAddress ip;
+    protected String nickname;
+    protected InetAddress ip;
 
     /* Constructeur */
     public User (String nickname, InetAddress ip) {
         this.nickname = nickname;
         this.ip = ip;
+    }
+
+    /* methodes */
+    public InetAddress getIp() {
+        return this.ip;
     }
 }
