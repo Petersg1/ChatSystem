@@ -10,7 +10,7 @@ public class Bye extends Packet {
     /* Constructor */
     public Bye(String nickname, InetAddress ip){
         this.nickname = nickname;
-
+        this.ip = ip;
     }
 
     /* Methods */

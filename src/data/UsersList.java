@@ -21,17 +21,32 @@ public class UsersList {
     /* Methodes */
     public void add (User newUser) {
         this.list.add(newUser);
+        this.printUserList();
+        this.nbUser+=1;
     }
     public void add (String nickname, InetAddress ip) {
         this.list.add(new User(nickname,ip));
+        this.printUserList();
+        this.nbUser+=1;
     }
 
-    public void remove (User user) {this.list.remove(user);}
+    public void remove (User user) {
+        this.list.remove(user);
+        this.printUserList();
+    }
     public void remove(InetAddress ip) {
-        for (int i=0; i<=this.nbUser; i++){
-           if (list.get(i).getIp()==ip){
+        for (int i=0; i<this.list.size(); i++){
+           if (list.get(i).getIp().equals(ip)){
                this.list.remove(i);
             }
+        }
+        this.printUserList();
+    }
+
+    /* /!\ Temporaire /!\ */
+    public void printUserList() {
+        for (int i=0; i<list.size();i++) {
+            System.out.println(i + ") " + list.get(i).getNickname() + " " + list.get(i).ip);
         }
     }
 

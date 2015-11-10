@@ -21,4 +21,8 @@ public class User {
     public InetAddress getIp() {
         return this.ip;
     }
+
+    public String getNickname() {
+        return this.nickname;
+    }
 }
