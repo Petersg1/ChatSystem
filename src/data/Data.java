@@ -69,6 +69,8 @@ public class Data {
     public void removeUser(InetAddress ip) {
         this.usersList.remove(ip);
     }
+
+
     public Boolean userConnected() {
         return localUser.getConnected();
     }

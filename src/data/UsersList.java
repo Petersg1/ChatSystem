@@ -20,14 +20,31 @@ public class UsersList {
 
     /* Methodes */
     public void add (User newUser) {
-        this.list.add(newUser);
-        this.printUserList();
-        this.nbUser+=1;
+        if (this.list.contains(newUser)){
+            System.out.println("User already in the list");
+            this.printUserList();
+        }
+        else {
+            this.list.add(newUser);
+            this.printUserList();
+            this.nbUser += 1;
+        }
     }
     public void add (String nickname, InetAddress ip) {
-        this.list.add(new User(nickname,ip));
-        this.printUserList();
-        this.nbUser+=1;
+        boolean dedans = false;
+        for (int i=0; i<this.list.size(); i++) {
+            if (list.get(i).getIp().equals(ip)) {
+                System.out.println("User already in the list");
+                this.printUserList();
+                dedans = true;
+            }
+        }
+        if (!dedans) {
+            this.list.add(new User(nickname, ip));
+            this.printUserList();
+            this.nbUser += 1;
+        }
+
     }
 
     public void remove (User user) {

@@ -47,12 +47,12 @@ public class ChatNi {
     }
 
     public void processBye(Bye byeReceived){
-        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + "d'adresse " + byeReceived.getIp() + ".");
+        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + " d'adresse " + byeReceived.getIp() + ".");
         this.data.removeUser(byeReceived.getIp());
     }
 
     public void processHelloBack(HelloBack helloBackReceived) {
-        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + "d'adresse " + helloBackReceived.getIp() + ".");
+        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + " d'adresse " + helloBackReceived.getIp() + ".");
         this.data.addUser(helloBackReceived.getNickname(), helloBackReceived.getIp());
     }
 
