@@ -22,24 +22,19 @@ public class UsersList {
     public void add (User newUser) {
         this.list.add(newUser);
     }
-
     public void add (String nickname, InetAddress ip) {
         this.list.add(new User(nickname,ip));
     }
 
-    public void remove (User user) {
-        this.list.remove(user);
-    }
-
-    public void remove (InetAddress ip) {
-
+    public void remove (User user) {this.list.remove(user);}
+    public void remove(InetAddress ip) {
         for (int i=0; i<=this.nbUser; i++){
            if (list.get(i).getIp()==ip){
                this.list.remove(i);
             }
-
         }
     }
+
     public int getNbUser() {
         return nbUser;
     }

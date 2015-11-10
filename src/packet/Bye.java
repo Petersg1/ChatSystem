@@ -8,8 +8,9 @@ public class Bye extends Packet {
     private InetAddress ip;
 
     /* Constructor */
-    public Bye(String nickname){
+    public Bye(String nickname, InetAddress ip){
         this.nickname = nickname;
+
     }
 
     /* Methods */

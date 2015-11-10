@@ -15,17 +15,22 @@ public class ChatNi {
 
     /* Attributs */
     private Data data;
+    private SendController sender;
 
     /* Constructeurs */
     public ChatNi(Data data) {
         this.data = data;
+        this.sender = new SendController();
     }
 
 
     //Envoie un hello
     public void sendHello() throws IOException {
-        SendController sender = new SendController();
         sender.sHello(new Hello("Pierre", data.getLocalUser().getIp()));
+    }
+
+    public void sendBye() throws IOException {
+        sender.sBye(new Bye("Pierre", data.getLocalUser().getIp()));
     }
 
     //Pour écouter les packets
@@ -44,6 +49,11 @@ public class ChatNi {
     public void processBye(Bye byeReceived){
         System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + "d'adresse " + byeReceived.getIp() + ".");
         this.data.removeUser(byeReceived.getIp());
+    }
+
+    public void processHelloBack(HelloBack helloBackReceived) {
+        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + "d'adresse " + helloBackReceived.getIp() + ".");
+        this.data.addUser(helloBackReceived.getNickname(), helloBackReceived.getIp());
     }
 
 

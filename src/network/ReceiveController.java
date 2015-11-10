@@ -2,6 +2,7 @@ package network;
 
 import packet.Bye;
 import packet.Hello;
+import packet.HelloBack;
 import packet.SerDeser;
 
 import java.io.*;
@@ -55,9 +56,11 @@ public class ReceiveController extends Thread {
                 this.chatNi.processHello((Hello) receivedObject);
             }
             else if (receivedObject instanceof Bye){
-                    this.chatNi.processBye((Bye) receivedObject);
+                this.chatNi.processBye((Bye) receivedObject);
             }
-            else{
+            else if (receivedObject instanceof HelloBack) {
+                this.chatNi.processHelloBack((HelloBack) receivedObject);
+            } else {
                 this.chatNi.processWeirdPacket();
             }
         }

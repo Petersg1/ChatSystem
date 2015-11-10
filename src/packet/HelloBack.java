@@ -5,7 +5,7 @@ import java.net.InetAddress;
 /**
  * Created by pierre on 19/10/15.
  */
-public class HelloBack {
+public class HelloBack extends Packet {
 
         private String nickname;
         private InetAddress ip;
