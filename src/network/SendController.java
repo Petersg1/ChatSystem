@@ -1,9 +1,6 @@
 package network;
 
-import packet.Bye;
-import packet.Hello;
-import packet.Packet;
-import packet.SerDeser;
+import packet.*;
 
 import java.io.*;
 import java.net.DatagramPacket;
@@ -28,6 +25,17 @@ public class SendController {
         System.out.println("Hi, just sent the packet to my local network");
     }
 
+    public void sendUnicast(Packet packet, InetAddress ip) throws IOException {
+        byte[] bytePacket = SerDeser.serialize(packet);
+        DatagramSocket udpSocket = new DatagramSocket();
+        DatagramPacket udpPacket = new DatagramPacket(bytePacket,bytePacket.length,ip, 42025 );
+
+        udpSocket.send(udpPacket);
+        udpSocket.close();
+
+        System.out.println("Hi, just sent the packet to " + ip.toString());
+    }
+
     //Envoie un hello à tous <3 enfin au localhost pour l'instant
     public void sHello(Hello helloPacket) throws IOException {
         sendBroadcast(helloPacket);
@@ -37,4 +45,9 @@ public class SendController {
     public void sBye(Bye byePacket) throws IOException {
         sendBroadcast(byePacket);
     }
+
+    public void sHelloBack(HelloBack helloBackPacket,InetAddress ip) throws IOException {
+        sendUnicast(helloBackPacket, ip);
+    }
+
 }
