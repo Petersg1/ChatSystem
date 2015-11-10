@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import java.net.InetAddress;
 
@@ -15,5 +15,9 @@ public class User {
     public User (String nickname, InetAddress ip) {
         this.nickname = nickname;
         this.ip = ip;
+    }
+
+    public InetAddress getIp() {
+        return ip;
     }
 }

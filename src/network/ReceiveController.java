@@ -1,12 +1,12 @@
-package Network;
+package network;
 
-import Packet.Hello;
-import Packet.SerDeser;
+import packet.Bye;
+import packet.Hello;
+import packet.SerDeser;
 
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
 
 
 /**
@@ -42,7 +42,7 @@ public class ReceiveController extends Thread {
         byte[] buf = new byte[1000]; //Création du buffer de reception
         Object receivedObject;
         DatagramSocket serverSocket = new DatagramSocket(42025); //Ecoute sur le port 42025
-        DatagramPacket receivedPacket = new DatagramPacket(buf, 1000); //Packet qui sera le packet reçu
+        DatagramPacket receivedPacket = new DatagramPacket(buf, 1000); //packet qui sera le packet reçu
 
         while (true) { // On écoute en permanence
             serverSocket.receive(receivedPacket); //ecoute
@@ -50,11 +50,17 @@ public class ReceiveController extends Thread {
 
 
             //Fais ce qu'il faut en conséquence de ce qui est reçu
-            if (receivedObject instanceof Hello) {
+            if (receivedObject instanceof Hello)
+            {
                 this.chatNi.processHello((Hello) receivedObject);
-            } else {
+            }
+            else if (receivedObject instanceof Bye){
+                    this.chatNi.processBye((Bye) receivedObject);
+            }
+            else{
                 this.chatNi.processWeirdPacket();
             }
+
         }
     }
 }

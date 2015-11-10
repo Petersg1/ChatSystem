@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -26,9 +26,10 @@ public class Data {
         this.usersList.add(user);
     }
 
-    public void remove(User user) {
+    public void removeUser(User user) {
         this.usersList.remove(user);
     }
+    public void removeUser(InetAddress ip){this.usersList.remove(ip);}
 
     public Boolean userConnected() {
         return localUser.getConnected();

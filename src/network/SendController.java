@@ -1,7 +1,7 @@
-package Network;
+package network;
 
-import Packet.Hello;
-import Packet.SerDeser;
+import packet.Hello;
+import packet.SerDeser;
 
 import java.io.*;
 import java.net.DatagramPacket;
@@ -18,7 +18,7 @@ public class SendController {
 
         byte[] byteHello = SerDeser.serialize(helloPacket);
         DatagramSocket udpSocket = new DatagramSocket();
-        DatagramPacket udpPacket = new DatagramPacket(byteHello,byteHello.length,InetAddress.getLoopbackAddress(), 42025 );
+        DatagramPacket udpPacket = new DatagramPacket(byteHello,byteHello.length,InetAddress.getByName("255.255.255.255"), 42025 );
 
         udpSocket.setBroadcast(true);
         udpSocket.send(udpPacket);

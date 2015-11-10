@@ -1,7 +1,8 @@
-package Network;
+package network;
 
-import Data.*;
-import Packet.Hello;
+import data.*;
+import packet.Bye;
+import packet.Hello;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -40,6 +41,11 @@ public class ChatNi {
     public void processHello(Hello helloReceived) {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
         this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
+    }
+
+    public void processBye(Bye byeReceived){
+        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + "d'adresse " + byeReceived.getIp() + ".");
+        this.data.removeUser(byeReceived.getIp());
     }
 
 

@@ -2,8 +2,8 @@
  * Created by pierre on 19/10/15.
  *
  */
-import Data.*;
-import Network.*;
+import data.*;
+import network.*;
 
 import java.io.IOException;
 import java.util.Scanner;

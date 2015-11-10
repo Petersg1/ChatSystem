@@ -1,4 +1,4 @@
-package Data;
+package data;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -30,5 +30,19 @@ public class UsersList {
     public void remove (User user) {
         this.list.remove(user);
     }
+
+    public void remove (InetAddress ip) {
+
+        for (int i=0; i<=this.nbUser; i++){
+           if (list.get(i).getIp()==ip){
+               this.list.remove(i);
+            }
+
+        }
+    }
+    public int getNbUser() {
+        return nbUser;
+    }
+
 
 }
