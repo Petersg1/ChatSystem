@@ -1,5 +1,6 @@
 package network;
 
+import data.Data;
 import packet.Bye;
 import packet.Hello;
 import packet.HelloBack;
@@ -18,11 +19,13 @@ public class ReceiveController extends Thread {
 
     /* Attributs */
     ChatNi chatNi;
+    Data data;
 
 
     /* Constructeur */
-    public ReceiveController(ChatNi chatNi) {
+    public ReceiveController(ChatNi chatNi, Data data) {
         this.chatNi = chatNi;
+        this.data = data;
     }
 
     /* Methodes */
@@ -53,16 +56,36 @@ public class ReceiveController extends Thread {
 
             //Fais ce qu'il faut en conséquence de ce qui est reçu
             if (receivedObject instanceof Hello) {
-                this.chatNi.processHello((Hello) receivedObject);
+                this.processHello((Hello) receivedObject);
             }
             else if (receivedObject instanceof Bye){
-                this.chatNi.processBye((Bye) receivedObject);
+                this.processBye((Bye) receivedObject);
             }
             else if (receivedObject instanceof HelloBack) {
-                this.chatNi.processHelloBack((HelloBack) receivedObject);
+                this.processHelloBack((HelloBack) receivedObject);
             } else {
-                this.chatNi.processWeirdPacket();
+                this.processWeirdPacket();
             }
         }
+    }
+
+    public void processHello(Hello helloReceived) throws IOException {
+        System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
+        this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
+        this.chatNi.sendHelloBack(helloReceived.getIp());
+    }
+
+    public void processBye(Bye byeReceived){
+        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + " d'adresse " + byeReceived.getIp() + ".");
+        this.data.removeUser(byeReceived.getIp());
+    }
+
+    public void processHelloBack(HelloBack helloBackReceived) {
+        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + " d'adresse " + helloBackReceived.getIp() + ".");
+        this.data.addUser(helloBackReceived.getNickname(), helloBackReceived.getIp());
+    }
+
+    public void processWeirdPacket() {
+        System.out.println("Something was received, but we don't know what :/");
     }
 }

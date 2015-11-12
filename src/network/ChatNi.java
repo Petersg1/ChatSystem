@@ -4,6 +4,7 @@ import data.*;
 import packet.*;
 
 import java.io.IOException;
+import java.net.InetAddress;
 
 /**
  * Created by pierre on 20/10/15.
@@ -37,38 +38,21 @@ public class ChatNi {
         sender.sHello(this.hello);
     }
 
+    public void sendHelloBack(InetAddress ip) throws IOException {
+        this.sender.sHelloBack(this.helloBack, ip);
+    }
+
     public void sendBye() throws IOException {
         sender.sBye(this.bye);
     }
 
     //Pour écouter les packets
     public void listenPacket() throws IOException, ClassNotFoundException {
-        ReceiveController receiverThread = new ReceiveController(this);
+        ReceiveController receiverThread = new ReceiveController(this, data);
         receiverThread.start();
     }
+}
 
     /* Method Process */
 
-    public void processHello(Hello helloReceived) throws IOException {
-        System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
-        this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
-        this.sender.sHelloBack(this.helloBack,helloReceived.getIp());
-    }
 
-    public void processBye(Bye byeReceived){
-        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + " d'adresse " + byeReceived.getIp() + ".");
-        this.data.removeUser(byeReceived.getIp());
-    }
-
-    public void processHelloBack(HelloBack helloBackReceived) {
-        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + " d'adresse " + helloBackReceived.getIp() + ".");
-        this.data.addUser(helloBackReceived.getNickname(), helloBackReceived.getIp());
-    }
-
-
-
-
-    public void processWeirdPacket() {
-        System.out.println("Something was received, but we don't know what :/");
-    }
-}
