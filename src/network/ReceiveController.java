@@ -93,7 +93,7 @@ public class ReceiveController extends Thread {
     }
 
     public void processMessage(Message messageReceived){
-        System.out.println("J'ai reçu un message de "+ messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
+        System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
 
     }
 }

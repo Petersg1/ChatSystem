@@ -42,7 +42,7 @@ public class Data {
         if (addr == InetAddress.getLocalHost()) {
             System.out.println("/!\\ Adresse local : " + addr + "C'est pas bon !");
         } else {
-            this.localUser = new LocalUser("Pierre", addr, broadcastAddr);
+            this.localUser = new LocalUser("LN", addr, broadcastAddr);
             System.out.println("/!\\ Adresse utilisée : " + addr);
             System.out.println("/!\\ Adresse broadcast utilisée : " + broadcastAddr);
         }
