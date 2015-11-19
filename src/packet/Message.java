@@ -1,16 +1,19 @@
 package packet;
 
+import java.net.InetAddress;
 import java.sql.Date;
 
 public class Message extends Packet{
     private Date time;
     private String from;
     private String payload;
+    private InetAddress ip ;
 
-    public Message(Date time, String from, String payload){
+    public Message(Date time, String from, String payload, InetAddress ip){
         this.time = time;
         this.from = from;
         this.payload = payload;
+        this.ip = ip;
     }
 
     public Date getTime() {
@@ -33,7 +36,11 @@ public class Message extends Packet{
         return this.payload;
     }
 
-    public void setPayload(String payload) {
-        this.payload = payload;
-    }
+    public void setPayload(String payload) {this.payload = payload;}
+
+    public InetAddress getIp () {return ip ;}
+
+    public void setIp(InetAddress ip){this.ip=ip;}
+
+
 }

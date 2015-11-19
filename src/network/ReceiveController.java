@@ -1,10 +1,7 @@
 package network;
 
 import data.Data;
-import packet.Bye;
-import packet.Hello;
-import packet.HelloBack;
-import packet.SerDeser;
+import packet.*;
 
 import java.io.*;
 import java.net.DatagramPacket;
@@ -62,9 +59,14 @@ public class ReceiveController extends Thread {
             }
             else if (receivedObject instanceof HelloBack) {
                 this.processHelloBack((HelloBack) receivedObject);
+            }
+            else if (receivedObject instanceof Message) {
+                this.processMessage((Message) receivedObject);
+
             } else {
                 this.processWeirdPacket();
             }
+
         }
     }
 
@@ -88,5 +90,10 @@ public class ReceiveController extends Thread {
 
     public void processWeirdPacket() {
         System.out.println("Something was received, but we don't know what :/");
+    }
+
+    public void processMessage(Message messageReceived){
+        System.out.println("J'ai reçu un message de "+ messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
+
     }
 }
