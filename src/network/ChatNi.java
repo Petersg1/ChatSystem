@@ -52,6 +52,10 @@ public class ChatNi {
             sender.sMessage(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()), ip);
      }
 
+    public void sendMessageBroadcast(String name, String payload) throws IOException {
+        sender.sMessageBroadcast(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()));
+    }
+
     //Pour écouter les packets
     public void listenPacket() throws IOException, ClassNotFoundException {
         ReceiveController receiverThread = new ReceiveController(this, data);

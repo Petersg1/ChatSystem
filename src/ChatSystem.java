@@ -42,7 +42,7 @@ public class ChatSystem {
                 sc.nextLine();
                 System.out.println("Que voulez vous dire ? ");
                 messagePayload = sc.nextLine();
-                network.sendMessage(name, messagePayload, InetAddress.getByName("255.255.255.255"));
+                network.sendMessageBroadcast(name, messagePayload);
             } else if (choix == 0) {
                 System.out.println("Au revoir madame/monsieur.");
                 //Mettre en place quelle chose pour arreter la thread.

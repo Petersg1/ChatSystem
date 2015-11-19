@@ -60,4 +60,8 @@ public class SendController {
         sendUnicast(messagePacket, ip);
     }
 
+    public void sMessageBroadcast(Message messagePacket) throws IOException {
+        sendBroadcast(messagePacket);
+    }
+
 }
