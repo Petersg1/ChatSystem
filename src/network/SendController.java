@@ -12,11 +12,17 @@ import java.net.InetAddress;
  */
 public class SendController {
 
+    private InetAddress broadcastAddress;
+
+    public SendController(InetAddress bIp) {
+        this.broadcastAddress = bIp;
+    }
+
     //Envoie un packet en broadcast sur 42025
     public void sendBroadcast(Packet packet) throws IOException {
         byte[] bytePacket = SerDeser.serialize(packet);
         DatagramSocket udpSocket = new DatagramSocket();
-        DatagramPacket udpPacket = new DatagramPacket(bytePacket,bytePacket.length,InetAddress.getByName("255.255.255.255"), 42025 );
+        DatagramPacket udpPacket = new DatagramPacket(bytePacket,bytePacket.length,this.broadcastAddress, 42025 );
 
         udpSocket.setBroadcast(true);
         udpSocket.send(udpPacket);

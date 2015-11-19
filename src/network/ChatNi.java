@@ -25,7 +25,7 @@ public class ChatNi {
     /* Constructeurs */
     public ChatNi(Data data) {
         this.data = data;
-        this.sender = new SendController();
+        this.sender = new SendController(data.getLocalUser().getBroadcastAddress());
         this.hello = new Hello(data.getLocalUser().getNickname(), data.getLocalUser().getIp());
         this.bye = new Bye(data.getLocalUser().getNickname(), data.getLocalUser().getIp());
         this.helloBack = new HelloBack(data.getLocalUser().getNickname(), data.getLocalUser().getIp());

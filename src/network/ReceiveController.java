@@ -9,7 +9,6 @@ import packet.SerDeser;
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.SocketException;
 
 
 /**
@@ -71,8 +70,10 @@ public class ReceiveController extends Thread {
 
     public void processHello(Hello helloReceived) throws IOException {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
-        this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
-        this.chatNi.sendHelloBack(helloReceived.getIp());
+        if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
+            this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
+            this.chatNi.sendHelloBack(helloReceived.getIp());
+        }
     }
 
     public void processBye(Bye byeReceived){
