@@ -1,7 +1,7 @@
 package packet;
 
 import java.net.InetAddress;
-import java.sql.Date;
+import java.util.Date;
 
 public class Message extends Packet{
     private Date time;

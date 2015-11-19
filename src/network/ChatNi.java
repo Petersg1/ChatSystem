@@ -5,7 +5,8 @@ import packet.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.sql.Date;
+import java.util.Date;
+import java.util.Calendar;
 
 /**
  * Created by pierre on 20/10/15.
@@ -47,8 +48,8 @@ public class ChatNi {
         sender.sBye(this.bye);
     }
 
-    public void sendMessage(String name, Date time, String payload, InetAddress ip) throws IOException {
-            sender.sMessage(new Message(time, name, payload, data.getLocalUser().getIp()), ip);
+    public void sendMessage(String name, String payload, InetAddress ip) throws IOException {
+            sender.sMessage(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()), ip);
      }
 
     //Pour écouter les packets

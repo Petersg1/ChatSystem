@@ -6,6 +6,7 @@ import data.*;
 import network.*;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Scanner;
 
 
@@ -22,7 +23,11 @@ public class ChatSystem {
 
         Scanner sc = new Scanner(System.in);
         Integer choix = 1;
-        System.out.println("Make your choice.\n1- Listening a packet\n2- Sending a packet\n3- Sending a Bye\n0- Exit");
+        String messagePayload;
+        String name;
+        System.out.println("What is your name? ");
+        name = sc.nextLine();
+        System.out.println("Make your choice.\n1- Listening a packet\n2- Sending a packet\n3- Sending a Bye\n4- Sending a Message\n0- Exit");
 
         while (choix != 0) {
             choix = sc.nextInt();
@@ -33,6 +38,11 @@ public class ChatSystem {
                 network.sendHello();
             } else if (choix == 3) {
                 network.sendBye();
+            } else if (choix == 4) {
+                sc.nextLine();
+                System.out.println("Que voulez vous dire ? ");
+                messagePayload = sc.nextLine();
+                network.sendMessage(name, messagePayload, InetAddress.getByName("255.255.255.255"));
             } else if (choix == 0) {
                 System.out.println("Au revoir madame/monsieur.");
                 //Mettre en place quelle chose pour arreter la thread.
