@@ -22,11 +22,11 @@ public class UsersList {
     public void add (User newUser) {
         if (this.list.contains(newUser)){
             System.out.println("User already in the list");
-            this.printUserList();
+            //this.printUserList();
         }
         else {
             this.list.add(newUser);
-            this.printUserList();
+            //this.printUserList();
             this.nbUser += 1;
         }
     }
@@ -35,7 +35,7 @@ public class UsersList {
         for (int i=0; i<this.list.size(); i++) {
             if (list.get(i).getIp().equals(ip)) {
                 System.out.println("User already in the list");
-                this.printUserList();
+                //this.printUserList();
                 dedans = true;
             }
         }
@@ -49,7 +49,7 @@ public class UsersList {
 
     public void remove (User user) {
         this.list.remove(user);
-        this.printUserList();
+        //this.printUserList();
     }
     public void remove(InetAddress ip) {
         for (int i=0; i<this.list.size(); i++){

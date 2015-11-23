@@ -94,6 +94,9 @@ public class ReceiveController extends Thread {
 
     public void processMessage(Message messageReceived){
         System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
-
+        
+        if (!messageReceived.getIp().equals(data.getLocalUser().getIp())) {
+            this.data.addUser(messageReceived.getFrom(), messageReceived.getIp());
+        }
     }
 }
