@@ -80,10 +80,12 @@ public class ChatSystem {
     public void performConnect(String userName) throws IOException {
         this.data = new Data(userName);
         chatNi.sendHello();
+        data.getLocalUser().setConnected(true);
 
     }
     public void performDisconnect() throws IOException {
         chatNi.sendBye();
+        data.getLocalUser().setConnected(false);
     }
 
     public void updateUserList() throws IOException {
