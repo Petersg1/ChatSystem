@@ -3,7 +3,7 @@
  *
  */
 import data.*;
-import gui.LoginWindow;
+import gui.*;
 import network.*;
 
 import java.io.IOException;
@@ -19,6 +19,7 @@ public class ChatSystem {
 
         /* Attribus acteurs */
         LoginWindow loginWindow = new LoginWindow();
+        //UserListWindow userListWindow = new UserListWindow();
         Data data = new Data();
         ChatNi network = new ChatNi(data);
 

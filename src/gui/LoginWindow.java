@@ -15,6 +15,7 @@ public class LoginWindow extends JFrame implements ActionListener {
     private JPanel panel = new JPanel();
     private JButton bConnection;
     private JLabel logo;
+    private JLabel error;
     private JLabel usernameLabel;
     private JTextField username;
 
@@ -37,23 +38,32 @@ public class LoginWindow extends JFrame implements ActionListener {
         this.usernameLabel = new JLabel("Username : ");
         this.username = new JTextField();
         this.username.setPreferredSize(new Dimension(100, 30));
+        this.username.addActionListener(this);
         b2.add(this.usernameLabel);
         b2.add(this.username);
 
         Box b3 = Box.createHorizontalBox();
+        this.error = new JLabel(" ");
+        this.error.setForeground(Color.red);
+        b3.add(this.error);
+
+        Box b4 = Box.createHorizontalBox();
         this.bConnection = new JButton("Connection");
         this.bConnection.addActionListener(this);
-        b3.add(this.bConnection);
+        b4.add(this.bConnection);
+
+
 
         Box b = Box.createVerticalBox();
         b.add(Box.createRigidArea(new Dimension(10,10)));
         b.add(b1);
         b.add(Box.createRigidArea(new Dimension(10,30)));
         b.add(b2);
-        b.add(Box.createRigidArea(new Dimension(10,30)));
         b.add(b3);
+        b.add(Box.createRigidArea(new Dimension(10,30)));
+        b.add(b4);
 
-        panel.add(b);
+        this.panel.add(b);
 
         //Affichage
         this.setContentPane(panel);
@@ -62,7 +72,13 @@ public class LoginWindow extends JFrame implements ActionListener {
 
     /* Methodes */
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == bConnection) {
+        if (e.getSource() == this.bConnection || e.getSource() == this.username) {
+            if (username.getText().length() >= 3) {
+                UserListWindow userListWindow = new UserListWindow();
+                this.dispose();
+            } else {
+                this.error.setText("Too short");
+            }
 
         }
     }
