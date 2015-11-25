@@ -12,8 +12,11 @@ import java.awt.event.ActionListener;
 public class UserListWindow extends JFrame implements ActionListener{
 
     /* Attributes */
-    private JPanel panel = new JPanel();
-    private JList<String> userList;
+    private JPanel panel = new JPanel(new BorderLayout());
+    private JScrollPane jScrollPane;
+    private JPanel topPanel;
+    private DefaultListModel model = new DefaultListModel();
+    //private JList<String> userList = ;
 
 
     /* Constructor */
@@ -27,28 +30,17 @@ public class UserListWindow extends JFrame implements ActionListener{
         this.setResizable(false);
 
 
-        Box b1 = Box.createHorizontalBox();
+        this.topPanel = new JPanel(new BorderLayout());
         JLabel title = new JLabel("Connected Users ");
         JButton refresh = new JButton("Refresh");
-        b1.add(title);
-        b1.add(refresh);
-        b1.setAlignmentX(Component.LEFT_ALIGNMENT);
+        refresh.setSize(10,10);
+        this.topPanel.add(title, BorderLayout.WEST);
+        this.topPanel.add(refresh, BorderLayout.EAST);
 
-        String stringList[] = {"Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", "Coucou", "Papa", "Pizza", };
-        Box b2 = Box.createVerticalBox();
-        this.userList = new JList<>(stringList);
-        this.userList.setFixedCellWidth(240);
-        b2.add(this.userList);
-        b2.setAlignmentX(Component.LEFT_ALIGNMENT);
-        b2.setAutoscrolls(true);
 
-        Box b = Box.createVerticalBox();
-        b.add(b1);
-        b.add(Box.createRigidArea(new Dimension(10,30)));
-        b.add(b2);
-        b.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        this.panel.add(b);
+        this.panel.add(this.topPanel, BorderLayout.NORTH);
+        this.panel.add(this.jScrollPane, BorderLayout.CENTER);
 
         this.setContentPane(panel);
         this.setVisible(true);

@@ -18,9 +18,10 @@ public class ChatSystem {
 
 
         /* Attribus acteurs */
-        LoginWindow loginWindow = new LoginWindow();
+
         //UserListWindow userListWindow = new UserListWindow();
         Data data = new Data();
+        Gui gui = new Gui();
         ChatNi network = new ChatNi(data);
 
 
