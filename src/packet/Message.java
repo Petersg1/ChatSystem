@@ -3,7 +3,11 @@ package packet;
 import java.net.InetAddress;
 import java.util.Date;
 
+
 public class Message extends Packet{
+
+    static final long serialVersionUID = 45L;
+
     private Date time;
     private String from;
     private String payload;

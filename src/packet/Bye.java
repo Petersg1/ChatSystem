@@ -4,6 +4,10 @@ import java.net.InetAddress;
 
 
 public class Bye extends Packet {
+
+    static final long serialVersionUID = 40L;
+
+
     private String nickname;
     private InetAddress ip;
 

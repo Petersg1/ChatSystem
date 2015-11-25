@@ -6,6 +6,9 @@ import java.net.InetAddress;
  * Created by pierre on 19/10/15.
  */
 public class Hello extends Packet{
+
+    static final long serialVersionUID = 43L;
+
     private String nickname;
     private InetAddress ip;
 
