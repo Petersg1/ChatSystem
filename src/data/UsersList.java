@@ -71,5 +71,12 @@ public class UsersList {
         return nbUser;
     }
 
+    public ArrayList<String> getUserList() {
+        ArrayList<String> arrayList = new ArrayList<>();
+        for (User user : this.list) {
+            arrayList.add(user.getNickname());
+        }
+    return arrayList;
+    }
 
 }

@@ -7,11 +7,14 @@ import gui.*;
 import network.*;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.Scanner;
 
 
 public class ChatSystem {
-
+// Attributs pour méthodes intermédiaires GUI Controller
+    Data data;
+    ChatNi chatNi;
 
     //Fonction principale
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
@@ -20,18 +23,19 @@ public class ChatSystem {
         /* Attribus acteurs */
 
         //UserListWindow userListWindow = new UserListWindow();
-        Data data = new Data();
         Gui gui = new Gui();
+        Data data = new Data("ln");
         ChatNi network = new ChatNi(data);
 
 
         Scanner sc = new Scanner(System.in);
         Integer choix = 1;
         String messagePayload;
+        String ipUnicast;
         String name;
         System.out.println("What is your name? ");
         name = sc.nextLine();
-        System.out.println("Make your choice.\n1- Listening packets\n2- Sending a hello\n3- Sending a Bye\n4- Sending a Message\n0- Exit");
+        System.out.println("Make your choice.\n1- Listening packets\n2- Sending a hello\n3- Sending a Bye\n4- Sending a Broadcast Message\n5- Sending a Unicast Message\n0- Exit");
 
         while (choix != 0) {
             choix = sc.nextInt();
@@ -48,18 +52,44 @@ public class ChatSystem {
                     break;
                 case 4:
                     sc.nextLine();
-                    System.out.println("Que voulez vous dire ? ");
+                    System.out.println("Que voulez vous dire en broadcast? ");
                     messagePayload = sc.nextLine();
                     network.sendMessageBroadcast(name, messagePayload);
+                    break;
+                case 5:
+                    sc.nextLine();
+                    System.out.println("A qui voulez vous parler en Unicast ? ");
+                    ipUnicast=sc.nextLine();
+                    System.out.println("Que voulez vous lui dire ? ");
+                    messagePayload = sc.nextLine();
+                    network.sendMessageUnicast(name,messagePayload, InetAddress.getByName(ipUnicast));
                     break;
                 case 0:
                     System.out.println("Au revoir madame/monsieur.");
                     //Mettre en place quelle chose pour arreter la thread.
                     break;
+
                 default:
                     System.out.println("Vous faites n'importe quoi. Try again.");
             }
         }
     }
+
+// méthodes intermédiaires GUI Controller
+
+    public void performConnect(String userName) throws IOException {
+        this.data = new Data(userName);
+        chatNi.sendHello();
+
+    }
+    public void performDisconnect() throws IOException {
+        chatNi.sendBye();
+    }
+
+    public void updateUserList() throws IOException {
+        data.getUserList();
+    }
+
+
 }
 
