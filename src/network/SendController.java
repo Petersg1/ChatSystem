@@ -56,7 +56,7 @@ public class SendController {
         sendUnicast(helloBackPacket, ip);
     }
 
-    public void sMessage(Message messagePacket, InetAddress ip) throws IOException {
+    public void sMessageUnicast(Message messagePacket, InetAddress ip) throws IOException {
         sendUnicast(messagePacket, ip);
     }
 

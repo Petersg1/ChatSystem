@@ -48,8 +48,8 @@ public class ChatNi {
         sender.sBye(this.bye);
     }
 
-    public void sendMessage(String name, String payload, InetAddress ip) throws IOException {
-            sender.sMessage(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()), ip);
+    public void sendMessageUnicast(String name, String payload, InetAddress ip) throws IOException {
+            sender.sMessageUnicast(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()), ip);
      }
 
     public void sendMessageBroadcast(String name, String payload) throws IOException {

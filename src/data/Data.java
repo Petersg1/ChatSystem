@@ -1,6 +1,7 @@
 package data;
 
 import java.net.*;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class Data {
 
 
     /* Constructeur */
-    public Data() throws UnknownHostException, SocketException {
+    public Data(String userName) throws UnknownHostException, SocketException {
         this.usersList = new UsersList();
 
         String ip;
@@ -42,7 +43,7 @@ public class Data {
         if (addr == InetAddress.getLocalHost()) {
             System.out.println("/!\\ Adresse local : " + addr + "C'est pas bon !");
         } else {
-            this.localUser = new LocalUser("LN", addr, broadcastAddr);
+            this.localUser = new LocalUser(userName, addr, broadcastAddr);
             System.out.println("/!\\ Adresse utilisée : " + addr);
             System.out.println("/!\\ Adresse broadcast utilisée : " + broadcastAddr);
         }
@@ -74,4 +75,9 @@ public class Data {
     public Boolean userConnected() {
         return localUser.getConnected();
     }
+
+    public ArrayList<String> getUserList(){
+        return usersList.getUserList();
+    }
+
 }
