@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
 
 /**
  * Created by pierre on 26/11/15.
@@ -29,7 +30,8 @@ public class ChatWindow extends JFrame implements ActionListener {
         JLabel title = new JLabel("");
 
 
-
+//this.addWindowListener(new WindowListener() {
+//});
 
         this.setContentPane(panel);
         this.setVisible(true);
