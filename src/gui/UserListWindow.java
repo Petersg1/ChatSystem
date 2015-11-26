@@ -40,7 +40,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
         //caractéristique de la fenetre
         this.setTitle("User List");
-        this.setSize(250,600);
+        this.setSize(250, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
