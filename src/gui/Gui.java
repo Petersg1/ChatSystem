@@ -33,4 +33,9 @@ public class Gui {
     public Map<InetAddress,String> getUserList() throws IOException {
         return chatSystem.getUserList();
     }
+
+    public void performGoodbye() throws IOException {
+        chatSystem.performDisconnect();
+    }
+
 }

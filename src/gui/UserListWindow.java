@@ -8,11 +8,14 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.IOException;
 
 /**
  * Created by pierre on 24/11/15.
  */
-public class UserListWindow extends JFrame implements ActionListener{
+public class UserListWindow extends JFrame implements ActionListener, WindowListener{
 
     /* Attributes */
     private Gui gui;
@@ -27,6 +30,8 @@ public class UserListWindow extends JFrame implements ActionListener{
     public UserListWindow(Gui gui) {
         super();
         this.gui = gui;
+
+        this.addWindowListener(this);
 
         //caractéristique de la fenetre
         this.setTitle("User List");
@@ -60,7 +65,46 @@ public class UserListWindow extends JFrame implements ActionListener{
 
     /* Methodes */
 
+
     public void actionPerformed (ActionEvent e) {
+    }
+
+    @Override
+    public void windowOpened(WindowEvent windowEvent) {
+    }
+
+    @Override
+    public void windowClosing(WindowEvent windowEvent) {
+        try {
+            this.gui.performGoodbye();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
+    }
+
+    @Override
+    public void windowClosed(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowIconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeiconified(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowActivated(WindowEvent windowEvent) {
+
+    }
+
+    @Override
+    public void windowDeactivated(WindowEvent windowEvent) {
 
     }
 }

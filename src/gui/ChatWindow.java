@@ -30,15 +30,13 @@ public class ChatWindow extends JFrame implements ActionListener {
         JLabel title = new JLabel("");
 
 
-//this.addWindowListener(new WindowListener() {
-//});
-
-        this.setContentPane(panel);
-        this.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
     }
+
+
+
 }
