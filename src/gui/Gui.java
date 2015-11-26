@@ -30,6 +30,10 @@ public class Gui {
         this.userListWindow = new UserListWindow(this, chatSystem.getUserList());
     }
 
+    public void launchChatWindow(String name, InetAddress ip) {
+        ChatWindow chatWindow = new ChatWindow(this, name, ip);
+    }
+
     public Map<InetAddress, String> getUserList() throws IOException {
         return chatSystem.getUserList();
     }

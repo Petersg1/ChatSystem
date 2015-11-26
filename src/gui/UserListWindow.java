@@ -5,6 +5,8 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,7 +19,7 @@ import java.util.Map;
 /**
  * Created by pierre on 24/11/15.
  */
-public class UserListWindow extends JFrame implements ActionListener, WindowListener{
+public class UserListWindow extends JFrame implements ActionListener, WindowListener, ListSelectionListener{
 
     /* Attributes */
     private Gui gui;
@@ -48,15 +50,18 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
         this.topPanel = new JPanel(new BorderLayout());
         this.refresh = new JButton("Refresh");
+        this.refresh.addActionListener(this);
         this.topPanel.add(refresh, BorderLayout.CENTER);
 
 
         //Il faut faire defaultlistmodel et tout
         this.jScrollPane = new JScrollPane(this.jList); // il faut mettre une jlist dedans
-
         for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
-           this.model.addElement(user.getValue());
+
+            System.out.println();
+            this.model.addElement(user.getValue() + "@" + user.getKey().toString());
         }
+        this.jList.addListSelectionListener(this);
 
         this.panel.add(this.topPanel, BorderLayout.NORTH);
         this.panel.add(this.jScrollPane, BorderLayout.CENTER);
@@ -70,6 +75,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
     public void actionPerformed (ActionEvent e) {
         if (e.getSource() == this.refresh) {
+            System.out.println("Je refresh");
             try {
                 this.userList = this.gui.getUserList();
             } catch (IOException e1) {
@@ -77,7 +83,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
             }
             this.model.clear();
             for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
-                this.model.addElement(user.getValue());
+                this.model.addElement(user.getValue() + "@" + user.getKey().toString());
             }
         }
     }
@@ -119,5 +125,10 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     @Override
     public void windowDeactivated(WindowEvent windowEvent) {
 
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent listSelectionEvent) {
+        System.out.println("Je selectionne " + jList.getSelectedValue());
     }
 }
