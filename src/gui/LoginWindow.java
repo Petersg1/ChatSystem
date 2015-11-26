@@ -76,7 +76,11 @@ public class LoginWindow extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.bConnection || e.getSource() == this.username) {
             if (username.getText().length() >= 3) {
-                gui.launchUserListWindow();
+                try {
+                    gui.launchUserListWindow(username.getText());
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
                 this.dispose();
             } else {
                 this.error.setText("Too short");
