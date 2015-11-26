@@ -4,6 +4,7 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by pierre on 09/11/15.
@@ -76,7 +77,7 @@ public class Data {
         return localUser.getConnected();
     }
 
-    public ArrayList<String> getUserList(){
+    public Map<InetAddress, String> getUserList(){
         return usersList.getUserList();
     }
 

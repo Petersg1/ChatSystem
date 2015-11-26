@@ -1,21 +1,16 @@
-/**
- * Created by pierre on 19/10/15.
- *
- */
-import data.*;
-import gui.*;
-import network.*;
+import data.Data;
+import gui.Gui;
+import network.ChatNi;
+import system.ChatSystem;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Scanner;
 
-
-public class ChatSystem {
-// Attributs pour méthodes intermédiaires GUI Controller
-    Data data;
-    ChatNi chatNi;
-
+/**
+ * Created by pierre on 26/11/15.
+ */
+public class Main {
     //Fonction principale
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
@@ -23,7 +18,8 @@ public class ChatSystem {
         /* Attribus acteurs */
 
         //UserListWindow userListWindow = new UserListWindow();
-        Gui gui = new Gui();
+        ChatSystem chatSystem = new ChatSystem();
+        Gui gui = new Gui(chatSystem);
         Data data = new Data("ln");
         ChatNi network = new ChatNi(data);
 
@@ -74,24 +70,4 @@ public class ChatSystem {
             }
         }
     }
-
-// méthodes intermédiaires GUI Controller
-
-    public void performConnect(String userName) throws IOException {
-        this.data = new Data(userName);
-        chatNi.sendHello();
-        data.getLocalUser().setConnected(true);
-
-    }
-    public void performDisconnect() throws IOException {
-        chatNi.sendBye();
-        data.getLocalUser().setConnected(false);
-    }
-
-    public void updateUserList() throws IOException {
-        data.getUserList();
-    }
-
-
 }
-

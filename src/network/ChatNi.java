@@ -5,7 +5,6 @@ import packet.*;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.util.Date;
 import java.util.Calendar;
 
 /**

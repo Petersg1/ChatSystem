@@ -2,6 +2,9 @@ package gui;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,16 +15,19 @@ import java.awt.event.ActionListener;
 public class UserListWindow extends JFrame implements ActionListener{
 
     /* Attributes */
+    private Gui gui;
     private JPanel panel = new JPanel(new BorderLayout());
     private JScrollPane jScrollPane;
     private JPanel topPanel;
     private DefaultListModel model = new DefaultListModel();
-    //private JList<String> userList = ;
+    private JList<String> userList = new JList<>(this.model);
 
 
     /* Constructor */
-    public UserListWindow() {
+    public UserListWindow(Gui gui) {
         super();
+        this.gui = gui;
+
         //caractéristique de la fenetre
         this.setTitle("User List");
         this.setSize(250,600);
@@ -31,13 +37,18 @@ public class UserListWindow extends JFrame implements ActionListener{
 
 
         this.topPanel = new JPanel(new BorderLayout());
-        JLabel title = new JLabel("Connected Users ");
         JButton refresh = new JButton("Refresh");
-        refresh.setSize(10,10);
-        this.topPanel.add(title, BorderLayout.WEST);
-        this.topPanel.add(refresh, BorderLayout.EAST);
+        this.topPanel.add(refresh, BorderLayout.CENTER);
 
 
+        String[] testList = {"Broadast", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred"};
+
+        //Il faut faire defaultlistmodel et tout
+        this.jScrollPane = new JScrollPane(this.userList); // il faut mettre une jlist dedans
+
+        for (int i=0; i<49;i++) {
+           this.model.addElement(testList[i]);
+        }
 
         this.panel.add(this.topPanel, BorderLayout.NORTH);
         this.panel.add(this.jScrollPane, BorderLayout.CENTER);

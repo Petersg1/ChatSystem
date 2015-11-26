@@ -2,6 +2,8 @@ package data;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by pierre on 07/11/15.
@@ -71,12 +73,12 @@ public class UsersList {
         return nbUser;
     }
 
-    public ArrayList<String> getUserList() {
-        ArrayList<String> arrayList = new ArrayList<>();
+    public Map<InetAddress,String > getUserList() {
+        HashMap<InetAddress, String> m = new HashMap<>();
         for (User user : this.list) {
-            arrayList.add(user.getNickname());
+            m.put(user.getIp(),user.getNickname());
         }
-    return arrayList;
+    return m;
     }
 
 }
