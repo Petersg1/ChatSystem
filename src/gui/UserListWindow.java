@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.util.Map;
 
 /**
  * Created by pierre on 24/11/15.
@@ -23,13 +25,16 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     private JScrollPane jScrollPane;
     private JPanel topPanel;
     private DefaultListModel model = new DefaultListModel();
-    private JList<String> userList = new JList<>(this.model);
+    private JList<String> jList = new JList<>(this.model);
+    private Map<InetAddress,String> userList;
+    private JButton refresh;
 
 
     /* Constructor */
-    public UserListWindow(Gui gui) {
+    public UserListWindow(Gui gui, Map<InetAddress,String> m) {
         super();
         this.gui = gui;
+        this.userList = m;
 
         this.addWindowListener(this);
 
@@ -42,17 +47,15 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
 
         this.topPanel = new JPanel(new BorderLayout());
-        JButton refresh = new JButton("Refresh");
+        this.refresh = new JButton("Refresh");
         this.topPanel.add(refresh, BorderLayout.CENTER);
 
 
-        String[] testList = {"Broadast", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred", "Henri", "Helene", "Alfred"};
-
         //Il faut faire defaultlistmodel et tout
-        this.jScrollPane = new JScrollPane(this.userList); // il faut mettre une jlist dedans
+        this.jScrollPane = new JScrollPane(this.jList); // il faut mettre une jlist dedans
 
-        for (int i=0; i<49;i++) {
-           this.model.addElement(testList[i]);
+        for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
+           this.model.addElement(user.getValue());
         }
 
         this.panel.add(this.topPanel, BorderLayout.NORTH);
@@ -65,8 +68,18 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
     /* Methodes */
 
-
     public void actionPerformed (ActionEvent e) {
+        if (e.getSource() == this.refresh) {
+            try {
+                this.userList = this.gui.getUserList();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            this.model.clear();
+            for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
+                this.model.addElement(user.getValue());
+            }
+        }
     }
 
     @Override

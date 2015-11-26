@@ -1,4 +1,5 @@
 import data.Data;
+import gui.ChatWindow;
 import gui.Gui;
 import network.ChatNi;
 import system.ChatSystem;
@@ -14,13 +15,18 @@ public class Main {
     //Fonction principale
     public static void main(String[] args) throws IOException, ClassNotFoundException, InterruptedException {
 
+        ChatSystem chatSystem = new ChatSystem();
+
+
+
 
         /* Attribus acteurs */
 
+        /*
         //UserListWindow userListWindow = new UserListWindow();
         ChatSystem chatSystem = new ChatSystem();
+        Data data = new Data("LN");
         Gui gui = new Gui(chatSystem);
-        Data data = new Data("ln");
         ChatNi network = new ChatNi(data);
 
 
@@ -69,7 +75,7 @@ public class Main {
                     System.out.println("Vous faites n'importe quoi. Try again.");
             }
         }
+        */
     }
-
 }
 

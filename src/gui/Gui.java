@@ -25,12 +25,12 @@ public class Gui {
 
 
     /* Methode */
-    public void launchUserListWindow(String name) throws IOException {
-        this.userListWindow = new UserListWindow(this);
+    public void launchUserListWindow(String name) throws IOException, ClassNotFoundException {
         chatSystem.performConnect(name);
+        this.userListWindow = new UserListWindow(this, chatSystem.getUserList());
     }
 
-    public Map<InetAddress,String> getUserList() throws IOException {
+    public Map<InetAddress, String> getUserList() throws IOException {
         return chatSystem.getUserList();
     }
 

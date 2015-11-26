@@ -3,6 +3,7 @@ package system; /**
  *
  */
 import data.*;
+import gui.Gui;
 import network.*;
 import data.User;
 
@@ -14,13 +15,20 @@ import java.util.Map;
 
 public class ChatSystem {
 // Attributs pour méthodes intermédiaires GUI Controller
-    Data data;
-    ChatNi chatNi;
+    private Gui gui;
+    private Data data;
+    private ChatNi chatNi;
 
 // méthodes intermédiaires GUI Controller
 
-    public void performConnect(String userName) throws IOException {
+    public ChatSystem() throws IOException {
+        this.gui = new Gui(this);
+    }
+
+    public void performConnect(String userName) throws IOException, ClassNotFoundException {
         this.data = new Data(userName);
+        this.chatNi = new ChatNi(this.data);
+        chatNi.listenPacket();
         chatNi.sendHello();
         data.getLocalUser().setConnected(true);
 
@@ -38,6 +46,8 @@ public class ChatSystem {
     public Map<InetAddress, String> getUserList() throws IOException {
         return data.getUserList();
     }
+
+
 
 
 }

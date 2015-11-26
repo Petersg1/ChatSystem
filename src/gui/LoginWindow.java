@@ -80,6 +80,8 @@ public class LoginWindow extends JFrame implements ActionListener {
                     gui.launchUserListWindow(username.getText());
                 } catch (IOException e1) {
                     e1.printStackTrace();
+                } catch (ClassNotFoundException e1) {
+                    e1.printStackTrace();
                 }
                 this.dispose();
             } else {

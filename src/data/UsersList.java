@@ -24,7 +24,7 @@ public class UsersList {
     public void add (User newUser) {
         if (this.list.contains(newUser)){
             System.out.println("User already in the list");
-            //this.printUserList();
+            this.printUserList();
         }
         else {
             this.list.add(newUser);
