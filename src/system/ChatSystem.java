@@ -29,7 +29,12 @@ public class ChatSystem {
         chatNi.sendBye();
         data.getLocalUser().setConnected(false);
     }
-
+    public void sendMessageUnicast(String name, String payload, InetAddress ip) throws IOException {
+        chatNi.sendMessageUnicast(name,payload,ip);
+    }
+    public void sendMessageBroadcast(String name, String payload) throws IOException {
+        chatNi.sendMessageBroadcast(name, payload);
+    }
     public Map<InetAddress, String> getUserList() throws IOException {
         return data.getUserList();
     }
