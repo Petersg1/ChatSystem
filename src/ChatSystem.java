@@ -81,17 +81,19 @@ public class ChatSystem {
         this.data = new Data(userName);
         chatNi.sendHello();
         data.getLocalUser().setConnected(true);
-
     }
     public void performDisconnect() throws IOException {
         chatNi.sendBye();
         data.getLocalUser().setConnected(false);
     }
-
     public void updateUserList() throws IOException {
         data.getUserList();
     }
-
-
+    public void sendMessageUnicast(String name, String payload, InetAddress ip) throws IOException {
+        chatNi.sendMessageUnicast(name,payload,ip);
+    }
+    public void sendMessageBroadcast(String name, String payload) throws IOException {
+        chatNi.sendMessageBroadcast(name, payload);
+    }
 }
 
