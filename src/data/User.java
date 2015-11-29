@@ -37,4 +37,10 @@ public class User {
         }
         return isEqual;
     }
+
+    @Override
+    public String toString() {
+        return "Username : " + nickname + " Ip address : " + ip.toString().substring(1);
+    }
+
 }

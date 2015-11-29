@@ -1,5 +1,7 @@
 package gui;
 
+import data.User;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.Border;
@@ -8,18 +10,17 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
  * Created by pierre on 24/11/15.
  */
-public class UserListWindow extends JFrame implements ActionListener, WindowListener, ListSelectionListener{
+public class UserListWindow extends JFrame implements ActionListener, WindowListener, MouseListener{
 
     /* Attributes */
     private Gui gui;
@@ -28,15 +29,15 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     private JPanel topPanel;
     private DefaultListModel model = new DefaultListModel();
     private JList<String> jList = new JList<>(this.model);
-    private Map<InetAddress,String> userList;
+    private ArrayList<User> userList;
     private JButton refresh;
 
 
     /* Constructor */
-    public UserListWindow(Gui gui, Map<InetAddress,String> m) {
+    public UserListWindow(Gui gui, ArrayList<User> l) {
         super();
         this.gui = gui;
-        this.userList = m;
+        this.userList = l;
 
         this.addWindowListener(this);
 
@@ -56,12 +57,12 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
         //Il faut faire defaultlistmodel et tout
         this.jScrollPane = new JScrollPane(this.jList); // il faut mettre une jlist dedans
-        for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
+        for(User user : userList) {
 
             System.out.println();
-            this.model.addElement(user.getValue() + "@" + user.getKey().toString());
+            this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
         }
-        this.jList.addListSelectionListener(this);
+        this.jList.addMouseListener(this);
 
         this.panel.add(this.topPanel, BorderLayout.NORTH);
         this.panel.add(this.jScrollPane, BorderLayout.CENTER);
@@ -82,8 +83,8 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
                 e1.printStackTrace();
             }
             this.model.clear();
-            for(Map.Entry<InetAddress,String> user : userList.entrySet()) {
-                this.model.addElement(user.getValue() + "@" + user.getKey().toString());
+            for(User user : userList) {
+                this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
             }
         }
     }
@@ -102,6 +103,8 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         System.exit(0);
     }
 
+
+    /* Les listeners */
     @Override
     public void windowClosed(WindowEvent windowEvent) {
 
@@ -127,8 +130,38 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
     }
 
+    //Mouse Listener
     @Override
-    public void valueChanged(ListSelectionEvent listSelectionEvent) {
-        System.out.println("Je selectionne " + jList.getSelectedValue());
+    public void mouseClicked(MouseEvent mouseEvent) {
+        String userString = this.jList.getSelectedValue();
+
+        if(mouseEvent.getClickCount()==2 && userString!=null){
+            User userSelected = this.userList.get(this.jList.getSelectedIndex());
+
+            System.out.println("User selected : " + userSelected);
+
+            gui.launchChatWindow(userSelected);
+
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent mouseEvent) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent mouseEvent) {
+
     }
 }

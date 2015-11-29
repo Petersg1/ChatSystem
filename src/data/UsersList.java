@@ -73,12 +73,8 @@ public class UsersList {
         return nbUser;
     }
 
-    public Map<InetAddress,String > getUserList() {
-        HashMap<InetAddress, String> m = new HashMap<>();
-        for (User user : this.list) {
-            m.put(user.getIp(),user.getNickname());
-        }
-    return m;
+    public ArrayList<User> getUserList() {
+        return list;
     }
 
 }

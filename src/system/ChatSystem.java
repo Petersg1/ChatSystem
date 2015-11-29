@@ -43,12 +43,9 @@ public class ChatSystem {
     public void sendMessageBroadcast(String name, String payload) throws IOException {
         chatNi.sendMessageBroadcast(name, payload);
     }
-    public Map<InetAddress, String> getUserList() throws IOException {
+    public ArrayList<User> getUserList() throws IOException {
         return data.getUserList();
     }
-
-
-
 
 }
 

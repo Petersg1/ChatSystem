@@ -72,12 +72,11 @@ public class Data {
         this.usersList.remove(ip);
     }
 
-
     public Boolean userConnected() {
         return localUser.getConnected();
     }
 
-    public Map<InetAddress, String> getUserList(){
+    public ArrayList<User> getUserList(){
         return usersList.getUserList();
     }
 

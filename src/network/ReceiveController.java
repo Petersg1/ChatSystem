@@ -72,10 +72,11 @@ public class ReceiveController extends Thread {
 
     public void processHello(Hello helloReceived) throws IOException {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
-        if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
+       //A décommenter le moment venu
+        // if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
             this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
             this.chatNi.sendHelloBack(helloReceived.getIp());
-        }
+        //}
     }
 
     public void processBye(Bye byeReceived){
@@ -94,9 +95,10 @@ public class ReceiveController extends Thread {
 
     public void processMessage(Message messageReceived){
         System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
-        
-        if (!messageReceived.getIp().equals(data.getLocalUser().getIp())) {
+
+
+        //A décommenter le moment venu
+       // if (!messageReceived.getIp().equals(data.getLocalUser().getIp()))
             this.data.addUser(messageReceived.getFrom(), messageReceived.getIp());
-        }
     }
 }

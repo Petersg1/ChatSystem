@@ -5,6 +5,7 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Map;
 
+import data.User;
 import system.ChatSystem;
 
 /**
@@ -30,11 +31,11 @@ public class Gui {
         this.userListWindow = new UserListWindow(this, chatSystem.getUserList());
     }
 
-    public void launchChatWindow(String name, InetAddress ip) {
-        ChatWindow chatWindow = new ChatWindow(this, name, ip);
+    public void launchChatWindow(User talkingUser) {
+        ChatWindow chatWindow = new ChatWindow(this, talkingUser);
     }
 
-    public Map<InetAddress, String> getUserList() throws IOException {
+    public ArrayList<User> getUserList() throws IOException {
         return chatSystem.getUserList();
     }
 
