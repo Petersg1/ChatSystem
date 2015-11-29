@@ -12,11 +12,13 @@ public class Message extends Packet{
     private String from;
     private String payload;
     private InetAddress ip ;
+    private Boolean broadcast;
 
-    public Message(Date time, String from, String payload, InetAddress ip){
+    public Message(Date time, String from, String payload, InetAddress ip, Boolean broadcast){
         this.time = time;
         this.from = from;
         this.payload = payload;
+        this.broadcast = broadcast;
         this.ip = ip;
     }
 
@@ -46,5 +48,7 @@ public class Message extends Packet{
 
     public void setIp(InetAddress ip){this.ip=ip;}
 
-
+    public Boolean isBroadcast() {
+        return broadcast;
+    }
 }

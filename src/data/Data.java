@@ -1,5 +1,7 @@
 package data;
 
+import system.ChatSystem;
+
 import java.net.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -14,12 +16,12 @@ public class Data {
     /* Attributs */
     private UsersList usersList;
     private LocalUser localUser;
-
+    private ChatSystem chatSystem;
 
     /* Constructeur */
-    public Data(String userName) throws UnknownHostException, SocketException {
+    public Data(String userName, ChatSystem cc) throws UnknownHostException, SocketException {
         this.usersList = new UsersList();
-
+        this.chatSystem = cc;
         String ip;
         InetAddress addr = InetAddress.getLocalHost();
         InetAddress broadcastAddr = InetAddress.getLocalHost();
@@ -48,7 +50,7 @@ public class Data {
             System.out.println("/!\\ Adresse utilisée : " + addr);
             System.out.println("/!\\ Adresse broadcast utilisée : " + broadcastAddr);
         }
-
+        this.usersList.add("Broadcast", broadcastAddr);
     }
 
     /* Methods */
@@ -59,14 +61,9 @@ public class Data {
 
     public void addUser(String nickname, InetAddress ip) {
         this.usersList.add(nickname, ip);
-    }
-    public void addUser(User user) {
-        this.usersList.add(user);
+        this.chatSystem.notifyNewUserAdded();
     }
 
-    public void removeUser(User user) {
-        this.usersList.remove(user);
-    }
 
     public void removeUser(InetAddress ip) {
         this.usersList.remove(ip);

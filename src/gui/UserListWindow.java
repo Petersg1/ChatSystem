@@ -42,7 +42,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         this.addWindowListener(this);
 
         //caractéristique de la fenetre
-        this.setTitle("User List");
+        this.setTitle("UserList");
         this.setSize(250, 600);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,7 +58,6 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         //Il faut faire defaultlistmodel et tout
         this.jScrollPane = new JScrollPane(this.jList); // il faut mettre une jlist dedans
         for(User user : userList) {
-
             System.out.println();
             this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
         }
@@ -74,6 +73,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
 
     /* Methodes */
 
+
     public void actionPerformed (ActionEvent e) {
         if (e.getSource() == this.refresh) {
             System.out.println("Je refresh");
@@ -86,6 +86,18 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
             for(User user : userList) {
                 this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
             }
+        }
+    }
+
+    public void updateUserlist() {
+        try {
+            this.userList = this.gui.getUserList();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+        this.model.clear();
+        for(User user : userList) {
+            this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
         }
     }
 
@@ -133,15 +145,11 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     //Mouse Listener
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-        String userString = this.jList.getSelectedValue();
 
-        if(mouseEvent.getClickCount()==2 && userString!=null){
+        if(mouseEvent.getClickCount()==2 && this.jList.getSelectedIndex() != -1) {
             User userSelected = this.userList.get(this.jList.getSelectedIndex());
-
             System.out.println("User selected : " + userSelected);
-
             gui.launchChatWindow(userSelected);
-
         }
     }
 

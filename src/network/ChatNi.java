@@ -2,6 +2,7 @@ package network;
 
 import data.*;
 import packet.*;
+import system.ChatSystem;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -21,11 +22,12 @@ public class ChatNi {
     private Hello hello;
     private Bye bye;
     private HelloBack helloBack;
-
+    private ChatSystem chatSystem;
 
     /* Constructeurs */
-    public ChatNi(Data data) {
+    public ChatNi(Data data, ChatSystem cc) {
         this.data = data;
+        this.chatSystem = cc;
         this.sender = new SendController(data.getLocalUser().getBroadcastAddress());
         this.hello = new Hello(data.getLocalUser().getNickname(), data.getLocalUser().getIp());
         this.bye = new Bye(data.getLocalUser().getNickname(), data.getLocalUser().getIp());
@@ -47,19 +49,20 @@ public class ChatNi {
         sender.sBye(this.bye);
     }
 
-    public void sendMessageUnicast(String name, String payload, InetAddress ip) throws IOException {
-            sender.sMessageUnicast(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()), ip);
+    public void sendMessage(String payload, InetAddress ip, Boolean isBroadcast) throws IOException {
+            sender.sMessageUnicast(new Message(Calendar.getInstance().getTime(), this.data.getLocalUser().getNickname(), payload, data.getLocalUser().getIp(), isBroadcast), ip);
      }
-
-    public void sendMessageBroadcast(String name, String payload) throws IOException {
-        sender.sMessageBroadcast(new Message(Calendar.getInstance().getTime(), name, payload, data.getLocalUser().getIp()));
-    }
 
     //Pour écouter les packets
     public void listenPacket() throws IOException, ClassNotFoundException {
         ReceiveController receiverThread = new ReceiveController(this, data);
         receiverThread.start();
     }
+
+    public void MessageReceived(Message message) {
+        this.chatSystem.notifyMessage(message);
+    }
+
 }
 
     /* Method Process */

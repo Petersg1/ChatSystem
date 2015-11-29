@@ -95,8 +95,7 @@ public class ReceiveController extends Thread {
 
     public void processMessage(Message messageReceived){
         System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
-
-
+        chatNi.MessageReceived(messageReceived);
         //A décommenter le moment venu
        // if (!messageReceived.getIp().equals(data.getLocalUser().getIp()))
             this.data.addUser(messageReceived.getFrom(), messageReceived.getIp());

@@ -63,5 +63,4 @@ public class SendController {
     public void sMessageBroadcast(Message messagePacket) throws IOException {
         sendBroadcast(messagePacket);
     }
-
 }
