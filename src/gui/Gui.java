@@ -26,7 +26,7 @@ public class Gui {
     public Gui(ChatSystem chatSystem) throws IOException {
         this.chatSystem = chatSystem;
         this.loginWindow = new LoginWindow(this);
-        this.chatWindows = new HashMap<InetAddress, ChatWindow>();
+        this.chatWindows = new HashMap<>();
     }
 
 
@@ -42,7 +42,7 @@ public class Gui {
             ChatWindow chatWindow = new ChatWindow(this, this.myName, talkingUser);
             this.chatWindows.put(talkingUser.getIp(), chatWindow);
         } else {
-            System.out.println("/!\\Chatwindow already open for this user. /!\\");
+            this.chatWindows.get(talkingUser.getIp()).setVisible(true);
         }
     }
 
@@ -60,12 +60,13 @@ public class Gui {
 
     public void newMessageArrived(Message message) {
 
-        if (!message.isBroadcast()) {
-            if (this.chatWindows.containsKey(message.getIp())) {
+        if (!message.isBroadcast()) { //Si ce n'est pas un broadcast
+            if (this.chatWindows.containsKey(message.getIp())) { //Si la fenetre existe déjà
                 this.chatWindows.get(message.getIp()).printMessage(message);
-            } else {
+            } else { //Si elle n'existe pas
                 ChatWindow chatWindow = new ChatWindow(this, this.myName, new User(message.getFrom(), message.getIp()));
                 this.chatWindows.put(message.getIp(), chatWindow);
+                chatWindow.printMessage(message);
             }
         } else {
             if (this.chatWindows.containsKey(this.getBroadcastIp())) {
@@ -73,6 +74,7 @@ public class Gui {
             } else {
                 ChatWindow chatWindow = new ChatWindow(this, this.myName, new User("Broadcast", this.getBroadcastIp()));
                 this.chatWindows.put(this.getBroadcastIp(), chatWindow);
+                chatWindow.printMessage(message);
             }
         }
     }

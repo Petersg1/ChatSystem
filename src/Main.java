@@ -17,6 +17,9 @@ public class Main {
 
         ChatSystem chatSystem = new ChatSystem();
 
+        /* /!\ Quand je reçois un paquet, une fenetre s'ouvre mais n'affiche pas le texte
+         Quand j'actualise la liste de contact, ca fait blanc
+          */
 
 
 

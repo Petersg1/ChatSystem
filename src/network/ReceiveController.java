@@ -6,6 +6,8 @@ import packet.*;
 import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketAddress;
 
 
 /**
@@ -61,7 +63,7 @@ public class ReceiveController extends Thread {
                 this.processHelloBack((HelloBack) receivedObject);
             }
             else if (receivedObject instanceof Message) {
-                this.processMessage((Message) receivedObject);
+                this.processMessage((Message) receivedObject, receivedPacket);
 
             } else {
                 this.processWeirdPacket();
@@ -72,11 +74,10 @@ public class ReceiveController extends Thread {
 
     public void processHello(Hello helloReceived) throws IOException {
         System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
-       //A décommenter le moment venu
-        // if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
+        if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
             this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
             this.chatNi.sendHelloBack(helloReceived.getIp());
-        //}
+        }
     }
 
     public void processBye(Bye byeReceived){
@@ -93,11 +94,11 @@ public class ReceiveController extends Thread {
         System.out.println("Something was received, but we don't know what :/");
     }
 
-    public void processMessage(Message messageReceived){
-        System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload());
-        chatNi.MessageReceived(messageReceived);
-        //A décommenter le moment venu
-       // if (!messageReceived.getIp().equals(data.getLocalUser().getIp()))
+    public void processMessage(Message messageReceived, DatagramPacket ip){
+        System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload() + " //////" + ip);
+        if (!messageReceived.getIp().equals(data.getLocalUser().getIp())) {
             this.data.addUser(messageReceived.getFrom(), messageReceived.getIp());
+            chatNi.MessageReceived(messageReceived);
+        }
     }
 }

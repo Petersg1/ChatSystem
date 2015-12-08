@@ -77,7 +77,8 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     public void actionPerformed (ActionEvent e) {
         if (e.getSource() == this.refresh) {
             System.out.println("Je refresh");
-            try {
+            this.updateUserlist();
+            /* try {
                 this.userList = this.gui.getUserList();
             } catch (IOException e1) {
                 e1.printStackTrace();
@@ -85,7 +86,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
             this.model.clear();
             for(User user : userList) {
                 this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
-            }
+            } */
         }
     }
 

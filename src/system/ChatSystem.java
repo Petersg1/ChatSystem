@@ -45,7 +45,7 @@ public class ChatSystem {
         return data.getUserList();
     }
 
-    public void notifyNewUserAdded() {
+    public void notifyUserListModified() {
         this.gui.updateUserlist();
     }
 

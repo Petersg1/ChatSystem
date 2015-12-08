@@ -59,7 +59,7 @@ public class ChatWindow extends JFrame implements ActionListener {
         gbc.gridwidth=2;
         panel.add(conversation, gbc);
 
-        this.textToSend = new JTextField("Je suis là");
+        this.textToSend = new JTextField("");
         this.textToSend.setPreferredSize(new Dimension(550,15));
         this.textToSend.setEditable(true);
         this.textToSend.addActionListener(this);
@@ -85,20 +85,29 @@ public class ChatWindow extends JFrame implements ActionListener {
         this.setContentPane(panel);
         this.pack();
         this.setVisible(true);
+        this.textToSend.grabFocus();
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == this.bSend || actionEvent.getSource() == this.textToSend) {
-            String textToSend=this.textToSend.getText();
-            this.conversation.append(Calendar.getInstance().getTime() + " " + this.myName + " : ");
-            this.conversation.append(textToSend + "\n");
             try {
-                if (this.talkingUser.getIp().equals(gui.getBroadcastIp()))
-                    this.gui.sendMessage(textToSend, this.talkingUser.getIp(), true);
-                else
-                    this.gui.sendMessage(textToSend, this.talkingUser.getIp(), false);
-                this.textToSend.setText("");
+                if (this.gui.getUserList().contains(this.talkingUser)) {
+                    String textToSend = this.textToSend.getText();
+                    this.conversation.append(Calendar.getInstance().getTime() + " " + this.myName + " : ");
+                    this.conversation.append(textToSend + "\n");
+                    try {
+                        if (this.talkingUser.getIp().equals(gui.getBroadcastIp()))
+                            this.gui.sendMessage(textToSend, this.talkingUser.getIp(), true);
+                        else
+                            this.gui.sendMessage(textToSend, this.talkingUser.getIp(), false);
+                        this.textToSend.setText("");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Your friend is disconnected");
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -61,12 +61,13 @@ public class Data {
 
     public void addUser(String nickname, InetAddress ip) {
         this.usersList.add(nickname, ip);
-        this.chatSystem.notifyNewUserAdded();
+        this.chatSystem.notifyUserListModified();
     }
 
 
     public void removeUser(InetAddress ip) {
         this.usersList.remove(ip);
+        this.chatSystem.notifyUserListModified();
     }
 
     public Boolean userConnected() {
