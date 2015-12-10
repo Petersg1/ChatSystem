@@ -40,7 +40,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "Username : " + nickname + " Ip address : " + ip.toString().substring(1);
+        return "Username : " + nickname + " Ip address : " + ip.toString();
     }
 
 }

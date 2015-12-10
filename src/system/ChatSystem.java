@@ -53,6 +53,10 @@ public class ChatSystem {
         this.gui.newMessageArrived(message);
     }
 
+    public void refreshHello() throws IOException {
+        this.chatNi.sendHello();
+    }
+
     public InetAddress getBroadcastIp() {
         return this.data.getLocalUser().getBroadcastAddress();
     }
