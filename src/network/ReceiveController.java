@@ -68,7 +68,6 @@ public class ReceiveController extends Thread {
             } else {
                 this.processWeirdPacket();
             }
-
         }
     }
 

@@ -62,7 +62,6 @@ public class UsersList {
         this.printUserList();
     }
 
-    /* /!\ Temporaire /!\ */
     public void printUserList() {
         for (int i=0; i<list.size();i++) {
             System.out.println(i + ") " + list.get(i).getNickname() + " " + list.get(i).ip);

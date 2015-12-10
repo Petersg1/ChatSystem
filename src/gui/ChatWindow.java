@@ -48,16 +48,19 @@ public class ChatWindow extends JFrame implements ActionListener {
         panel.add(title, gbc);
 
 
+
         this.conversation = new JTextArea("");
         this.conversation.setFont(new Font("Arial", Font.BOLD,14));
-        conversation.setPreferredSize(new Dimension(600,555));
+        //conversation.setPreferredSize(new Dimension(600,555));
         conversation.setAutoscrolls(true);
         conversation.setEditable(false);
         gbc.gridx=0;
         gbc.gridy=1;
         gbc.gridheight=1;
         gbc.gridwidth=2;
-        panel.add(conversation, gbc);
+        JScrollPane scrollPane = new JScrollPane(conversation);
+        scrollPane.setPreferredSize(new Dimension(600,555));
+        panel.add(scrollPane, gbc);
 
         this.textToSend = new JTextField("");
         this.textToSend.setPreferredSize(new Dimension(550,15));

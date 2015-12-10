@@ -59,7 +59,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         this.jScrollPane = new JScrollPane(this.jList); // il faut mettre une jlist dedans
         for(User user : userList) {
             System.out.println();
-            this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
+            this.model.addElement(user.getNickname() + " (" + user.getIp().toString()+ ")");
         }
         this.jList.addMouseListener(this);
 
@@ -78,15 +78,6 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         if (e.getSource() == this.refresh) {
             System.out.println("Je refresh");
             this.updateUserlist();
-            /* try {
-                this.userList = this.gui.getUserList();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            this.model.clear();
-            for(User user : userList) {
-                this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
-            } */
         }
     }
 
@@ -98,7 +89,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         }
         this.model.clear();
         for(User user : userList) {
-            this.model.addElement(user.getNickname() + " (" + user.getIp().toString().substring(1)+ ")");
+            this.model.addElement(user.getNickname() + " (" + user.getIp().toString()+ ")");
         }
     }
 
