@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="ChatSystem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ChatSystem_jar</output-path>
+    <root id="archive" name="ChatSystem.jar">
+      <element id="dir-copy" path="$PROJECT_DIR$/src/images" />
+      <element id="module-output" name="ChatSystem" />
+    </root>
+  </artifact>
+</component>

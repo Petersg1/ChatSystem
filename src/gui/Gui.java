@@ -62,6 +62,7 @@ public class Gui {
 
         if (!message.isBroadcast()) { //Si ce n'est pas un broadcast
             if (this.chatWindows.containsKey(message.getIp())) { //Si la fenetre existe déjà
+                this.chatWindows.get(message.getIp()).setVisible(true);
                 this.chatWindows.get(message.getIp()).printMessage(message);
             } else { //Si elle n'existe pas
                 ChatWindow chatWindow = new ChatWindow(this, this.myName, new User(message.getFrom(), message.getIp()));
@@ -70,6 +71,7 @@ public class Gui {
             }
         } else {
             if (this.chatWindows.containsKey(this.getBroadcastIp())) {
+                this.chatWindows.get(message.getIp()).setVisible(true);
                 this.chatWindows.get(this.getBroadcastIp()).printMessage(message);
             } else {
                 ChatWindow chatWindow = new ChatWindow(this, this.myName, new User("Broadcast", this.getBroadcastIp()));
