@@ -89,6 +89,7 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
     public void updateUserlist() {
         try {
             this.userList = this.gui.getUserList();
+            System.out.println("//!\\\\" + userList.get(0));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -96,8 +97,12 @@ public class UserListWindow extends JFrame implements ActionListener, WindowList
         for(User user : userList) {
             this.model.addElement(user.getNickname() + " (" + user.getIp().toString()+ ")");
         }
-        //this.model.clear();
-        //this.paint(this.getGraphics());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        this.repaint();
     }
 
     @Override

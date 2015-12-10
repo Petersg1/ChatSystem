@@ -89,7 +89,10 @@ public class Gui {
     }
 
     public void updateUserlist() {
-        if (userListWindow != null)
+        if (userListWindow != null) {
+            //this.
             this.userListWindow.updateUserlist();
+
+        }
     }
 }

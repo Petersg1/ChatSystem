@@ -33,7 +33,6 @@ public class User {
         if (object != null && object instanceof User)
         {
             isEqual=(this.nickname.equals(((User)object).getNickname())&& this.ip.equals(((User)object).getIp()));
-            System.out.println("vous etes bien rentrés dans le equals overridé");
         }
         return isEqual;
     }
