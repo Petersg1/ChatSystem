@@ -27,8 +27,6 @@ public class SendController {
         udpSocket.setBroadcast(true);
         udpSocket.send(udpPacket);
         udpSocket.close();
-
-        System.out.println("Hi, just sent the packet to my local network");
     }
 
     public void sendUnicast(Packet packet, InetAddress ip) throws IOException {
@@ -45,11 +43,13 @@ public class SendController {
     //Envoie un hello à tous <3 enfin au localhost pour l'instant
     public void sHello(Hello helloPacket) throws IOException {
         sendBroadcast(helloPacket);
+        System.out.println("Hello envoyé à tout le monde.");
     }
 
     //Envoie un bye à tous <3 enfin au localhost pour l'instant
     public void sBye(Bye byePacket) throws IOException {
         sendBroadcast(byePacket);
+        System.out.println("Bye envoyé à tout le monde.");
     }
 
     public void sHelloBack(HelloBack helloBackPacket,InetAddress ip) throws IOException {

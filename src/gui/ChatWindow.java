@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Map;
 
 /**
  * Created by pierre on 26/11/15.
@@ -97,7 +96,8 @@ public class ChatWindow extends JFrame implements ActionListener {
             try {
                 if (this.gui.getUserList().contains(this.talkingUser)) {
                     String textToSend = this.textToSend.getText();
-                    this.conversation.append(Calendar.getInstance().getTime() + " " + this.myName + " : ");
+                    String date = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+                    this.conversation.append(date + " - " + this.myName + " > ");
                     this.conversation.append(textToSend + "\n");
                     try {
                         if (this.talkingUser.getIp().equals(gui.getBroadcastIp()))
@@ -114,11 +114,11 @@ public class ChatWindow extends JFrame implements ActionListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
     public void printMessage(Message message) {
-        this.conversation.append(message.getTime() + " " + message.getFrom() + " : " + message.getPayload() + "\n");
+        String date = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
+        this.conversation.append( date + " - " + message.getFrom() + " < " + message.getPayload() + "\n");
     }
 }
