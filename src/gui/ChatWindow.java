@@ -119,6 +119,6 @@ public class ChatWindow extends JFrame implements ActionListener {
 
     public void printMessage(Message message) {
         String date = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE);
-        this.conversation.append( date + " - " + message.getFrom() + " < " + message.getPayload() + "\n");
+        this.conversation.append(date + " - " + message.getFrom() + " < " + message.getPayload() + "\n");
     }
 }

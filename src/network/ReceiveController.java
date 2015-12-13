@@ -54,50 +54,21 @@ public class ReceiveController extends Thread {
 
             //Fais ce qu'il faut en conséquence de ce qui est reçu
             if (receivedObject instanceof Hello) {
-                this.processHello((Hello) receivedObject);
+                this.chatNi.processHello((Hello) receivedObject);
             }
             else if (receivedObject instanceof Bye){
-                this.processBye((Bye) receivedObject);
+                this.chatNi.processBye((Bye) receivedObject);
             }
             else if (receivedObject instanceof HelloBack) {
-                this.processHelloBack((HelloBack) receivedObject);
+                this.chatNi.processHelloBack((HelloBack) receivedObject);
             }
             else if (receivedObject instanceof Message) {
-                this.processMessage((Message) receivedObject, receivedPacket);
+                this.chatNi.processMessage((Message) receivedObject);
 
             } else {
-                this.processWeirdPacket();
+                this.chatNi.processWeirdPacket();
             }
         }
     }
 
-    public void processHello(Hello helloReceived) throws IOException {
-        System.out.println("J'ai reçu un hello de " + helloReceived.getNickname() + " d'adresse " + helloReceived.getIp() + ".");
-        if (!helloReceived.getIp().equals(data.getLocalUser().getIp())) {
-            this.data.addUser(helloReceived.getNickname(), helloReceived.getIp());
-            this.chatNi.sendHelloBack(helloReceived.getIp());
-        }
-    }
-
-    public void processBye(Bye byeReceived){
-        System.out.println("J'ai reçu un bye de " + byeReceived.getNickname() + " d'adresse " + byeReceived.getIp() + ".");
-        this.data.removeUser(byeReceived.getIp());
-    }
-
-    public void processHelloBack(HelloBack helloBackReceived) {
-        System.out.println("J'ai reçu un helloBack de " + helloBackReceived.getNickname() + " d'adresse " + helloBackReceived.getIp() + ".");
-        this.data.addUser(helloBackReceived.getNickname(), helloBackReceived.getIp());
-    }
-
-    public void processWeirdPacket() {
-        System.out.println("Something was received, but we don't know what :/");
-    }
-
-    public void processMessage(Message messageReceived, DatagramPacket ip){
-        System.out.println(messageReceived.getTime()+ " - " + messageReceived.getFrom()+ " : "+ messageReceived.getPayload() + " //////" + ip);
-        if (!messageReceived.getIp().equals(data.getLocalUser().getIp())) {
-            this.data.addUser(messageReceived.getFrom(), messageReceived.getIp());
-            chatNi.MessageReceived(messageReceived);
-        }
-    }
 }

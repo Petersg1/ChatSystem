@@ -80,10 +80,6 @@ public class Gui {
         }
     }
 
-    public void refreshHello() throws IOException {
-        this.chatSystem.refreshHello();
-    }
-
     public InetAddress getBroadcastIp() {
         return this.chatSystem.getBroadcastIp();
     }

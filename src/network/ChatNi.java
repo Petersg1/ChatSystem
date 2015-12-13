@@ -5,6 +5,7 @@ import packet.*;
 import system.ChatSystem;
 
 import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.util.Calendar;
 
@@ -50,8 +51,8 @@ public class ChatNi {
     }
 
     public void sendMessage(String payload, InetAddress ip, Boolean isBroadcast) throws IOException {
-            sender.sMessageUnicast(new Message(Calendar.getInstance().getTime(), this.data.getLocalUser().getNickname(), payload, data.getLocalUser().getIp(), isBroadcast), ip);
-     }
+        sender.sMessageUnicast(new Message(Calendar.getInstance().getTime(), this.data.getLocalUser().getNickname(), payload, data.getLocalUser().getIp(), isBroadcast), ip);
+    }
 
     //Pour écouter les packets
     public void listenPacket() throws IOException, ClassNotFoundException {
@@ -59,12 +60,25 @@ public class ChatNi {
         receiverThread.start();
     }
 
-    public void MessageReceived(Message message) {
-        this.chatSystem.notifyMessage(message);
-    }
-
-}
-
     /* Method Process */
 
+    public void processHello(Hello helloReceived) throws IOException {
+        this.chatSystem.processHello(helloReceived);
+    }
 
+    public void processBye(Bye byeReceived) {
+        this.chatSystem.processBye(byeReceived);
+    }
+
+    public void processHelloBack(HelloBack helloBackReceived) {
+        this.chatSystem.processHelloBack(helloBackReceived);
+    }
+
+    public void processWeirdPacket() {
+        this.chatSystem.processWeirdPacket();
+    }
+
+    public void processMessage(Message messageReceived) {
+        this.chatSystem.processMessage(messageReceived);
+    }
+}
